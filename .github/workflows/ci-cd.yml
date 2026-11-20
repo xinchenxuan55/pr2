@@ -81,13 +81,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          git add linear_model.txt
-          git commit -m "Generate new model [skip ci]"
-
+          cp linear_model.txt /tmp/linear_model.txt
           git checkout --orphan temp_release
           git rm -rf .
-          git checkout main -- linear_model.txt
-          git add linear_model.txt
+          cp /tmp/linear_model.txt linear_model.txt
+          git add -f linear_model.txt
           git commit -m "Update linear model"
           git push --force origin temp_release:release
 
